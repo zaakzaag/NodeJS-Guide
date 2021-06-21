@@ -1,15 +1,16 @@
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
 
-app.use((req, res, next) => {
-  console.log("innn");
-  next(); //allowus to continue to next middleware in line
-});
+const adminRoutes = require("./routes/admin");
 
-app.use((req, res, next) => {
-  console.log("diff");
-  res.send("<h1>hellloo</h1>");
-});
+const shopRoutes = require("./routes/shop");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(adminRoutes);
+
+app.use(shopRoutes);
 
 app.listen(3000);
 // const server = http.createServer(app);
